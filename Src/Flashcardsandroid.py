@@ -20,7 +20,8 @@ class FlashcardApp:
     def __init__(self, master):
         self.master = master
         self.master.title("Flashcards")
-        self.master.geometry('800x600')
+        self.master.geometry('600x800')
+        #self.master.geometry('1080x1920')
         #self.master.config(bg='lightblue')
 
         #startmenu
@@ -113,8 +114,8 @@ class FlashcardApp:
     
     def OnStart(self):
         self.start_frame.pack_forget()
-        self.quiz_frame.pack(fill = 'both', expand = True)
         self.load_csv_file()
+        self.quiz_frame.pack(fill = 'both', expand = True)
         self.restart_quiz()
 
 
