@@ -1,0 +1,10 @@
+Question,Option1,Option2,Option3,Option4,CorrectAnswer
+Quin avantatge dona afegir precondicions en forma d’assercions en un codi?,Ens assegura que els resultats de las funciones son correctes.,Ens assegura que els bucles funcionen correctament.,Ens assegura que els paràmetres de les crides a funcions son correctes.,Ens assegura que els objectes de les classes sempre estaran en estats correctes.,
+Com podem detectar el mal us d’un programa per part de l’usuari?,Amb assercions.,Amb tractament estructurat d’excepcions.,Amb assercions a la versió final de programa (release).,b) i c).,
+Un algorisme greedy es pot aplicar sempre que:,el conjunt de solucions òptimes locals portin a la solució òptima global,la prioritat és trobar la millor solució,el problema es pugui subdividir en problemes més petits,hi hagi una única solució,
+"En l’algorisme de Kruskal, com es pot representar també la complexitat O(e*v + e*log(e))""",O(e*v + v*log(e)),O(e2 + e*log(e)),O(v2 + e*log(e)),O(e*v + e*log(v)),
+La complexitat d’un algorisme recursiu,és proporcional al quadrat de trucades a la funció,és proporcional a la profunditat de trucades a la funció,es pot determinar utilitzant polinomis,és proporcional al valor d’entrada de la funció,
+En quin cas es pot convertir una funció recursiva en una funció iterativa amb un sol bucle?,Quan la funció té recursivitat indirecta,Quan la funció té recursivitat directa,Quan la funció té recursivitat múltiple,Quan la funció té recursivitat final,
+Un algorisme de backtracking:,Retorna la millor solució,Retorna la primera solució que troba,Retorna si existeix una solució o no,Retorna totes les solucions possibles,
+Un algorisme de backtracking és recomanable quan:,el conjunt de solucions òptimes locals portin a la solució òptima global,la prioritat és trobar la millor solució,el problema es pugui subdividir en problemes més petits,hi hagi una única solució,
+La principal manera de reduir la complexitat d’algorismes de backtracking és:,Reduir el nombre d’operacions per node visitat,Forward Checking,Reduir l’espai de solucions,Backward Checking,

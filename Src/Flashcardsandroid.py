@@ -2,6 +2,8 @@ import pandas as pd
 import tkinter as tk
 from tkinter import filedialog
 import tkinter.font as tkFont
+
+
 '''
 from android.permissions import Permission, request_permissions, check_permission
 
@@ -17,14 +19,27 @@ if  check_permissions(perms)!= True:
     request_permissions(perms)
 '''
 class FlashcardApp:
+
     def __init__(self, master):
         self.master = master
         self.master.title("Flashcards")
-        self.master.geometry('600x800')
-        #self.master.geometry('1080x1920')
-        #self.master.config(bg='lightblue')
+        self.master.geometry('800x600')
 
-        #startmenu
+        #Configurables
+        answers_font = tkFont.Font(family="Helvetica", size=12, weight="bold")
+        questions_font = tkFont.Font(family='Arial', size = 12, weight='bold')
+
+        answer_button_design = {
+                'bg': '#4CAF50',
+                'fg': 'white',
+                'font': answers_font,
+                'borderwidth': 2,
+                'relief': 'raised',
+                'wraplength' : 780,
+        }
+
+
+        #start window
         self.start_frame = tk.Frame(master)
         self.start_frame.pack(fill = 'both',expand = True)
        
@@ -33,24 +48,20 @@ class FlashcardApp:
                               font = ('Helvetica', 20, 'bold'))
         start_text.pack(pady = 20)
 
+
+        #Questions window
         self.quiz_frame = tk.Frame(master)
         start_button = tk.Button(self.start_frame, text = 'INICIO', font = ('Arial', 15), command = self.OnStart)
         start_button.pack()
 
-        
-
-        #self.load_csv_file()
-
         self.current_question = 0
         self.correct_answers = 0
         self.wrong_answers = 0
-        answers_font = tkFont.Font(family="Helvetica", size=12, weight="bold")
-        questions_font = tkFont.Font(family='Arial', size = 12, weight='bold')
 
         self.question_counter_label = tk.Label(self.quiz_frame, text="")
         self.question_counter_label.pack()
 
-        self.question_label = tk.Label(self.quiz_frame , text="",font=questions_font,wraplength=780, justify='left', anchor='w')
+        self.question_label = tk.Label(self.quiz_frame , text="", font=questions_font, wraplength=780, justify='left', anchor='w')
         self.question_label.pack()
 
         self.next_button = tk.Button(self.quiz_frame, text="Siguiente", command=self.next_question)
@@ -59,24 +70,15 @@ class FlashcardApp:
         answer_frame = tk.Frame(self.quiz_frame)
         answer_frame.pack(pady = 10)
 
-        self.answer_button_design = {
-            'bg': '#4CAF50',
-            'fg': 'white',
-            'font': answers_font,
-            'borderwidth': 2,
-            'relief': 'raised',
-            'wraplength' : 780,
-        }
-
-
         self.option_buttons = []
         for i in range(4):
-            button = tk.Button(answer_frame, text="",**self.answer_button_design,command=lambda i=i: self.check_answer(i))
+            button = tk.Button(answer_frame, text="",**answer_button_design,command=lambda i=i: self.check_answer(i))
             button.grid(row = i, column = 0, padx = 10, pady = 5, sticky = 'ew')
             self.option_buttons.append(button)
             
         
-        #Colocacion de objetos
+        #Object placing
+        
         result_label_frame = tk.Frame(self.quiz_frame)
         result_label_frame.pack()
         
@@ -98,30 +100,17 @@ class FlashcardApp:
         self.exit_button = tk.Button(button_frame, text="Exit", command=master.destroy, width = 10, height = 2)
         self.exit_button.pack(side = tk.LEFT, padx = 5)
 
-
-
-        #Test para colocar cada boton en su sitio
-        #self.mouse_coords_label = tk.Label(master, text='Coordenadas: ')
-        #self.mouse_coords_label.pack()
-        #master.bind('<Motion>', self.updateCoords)
-
-
-
         if hasattr(self, 'df'):
             self.randomize_questions()
             self.update_question()
 
-    
+    #Methods
+            
     def OnStart(self):
         self.start_frame.pack_forget()
         self.load_csv_file()
         self.quiz_frame.pack(fill = 'both', expand = True)
         self.restart_quiz()
-
-
-    def updateCoords(self, event): #Funcion de prueba no tocar y no se ejecuta
-        coords = f'Coordendas: x={event.x}, y={event.y}'
-        self.mouse_coords_label.config(text = coords) 
 
 
     def load_csv_file(self):
@@ -135,12 +124,12 @@ class FlashcardApp:
     def update_question(self):
         self.question_counter_label.config(text=f"Question {self.current_question + 1} of {len(self.df)}")
         question = self.df.iloc[self.current_question]
-        self.question_label.config(text=question['Question'], wraplength=780, justify='left', anchor='w')
+        tt = question['Question']
+        self.question_label.config(text=f'{self.current_question + 1}.- {tt}', wraplength=780, justify='left', anchor='w')
         for i, button in enumerate(self.option_buttons):
             button.config(text=question[f'Option{i + 1}'], state=tk.NORMAL, bg='grey', wraplength=780)
     
     def restart_quiz(self):
-        # Reset the quiz
         self.current_question = 0
         self.correct_answers = 0
         self.wrong_answers = 0
